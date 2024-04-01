@@ -7,15 +7,20 @@ const Player = ({ name, symbol }) => {
     setIsEditing((prevState) => !prevState);
   };
 
-  const inputElement = <input type="text" />;
-  const playerName = <span className="player-name">{name}</span>;
+  let playerName = <span className="player-name">{name}</span>;
+  //   let btnCaption = "Edit";
+
+  if (isEditing) {
+    playerName = <input type="text" required value={name} />;
+    // btnCaption = "Save";
+  }
 
   return (
     <li>
       <span className="player">
-        {isEditing ? inputElement : playerName}
+        {playerName}
         <span className="player-symbol">{symbol}</span>
-        <button onClick={handleEditClick}>Edit</button>
+        <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
       </span>
     </li>
   );
